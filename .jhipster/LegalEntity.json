@@ -1,0 +1,52 @@
+{
+  "applications": "*",
+  "changelogDate": "20220913101712",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "legal_entity",
+  "fields": [
+    {
+      "fieldName": "legalEntityName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "streetAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "postalCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "city",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "stateProvince",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "LegalEntity",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "cellName",
+      "otherEntityName": "cell",
+      "otherEntityRelationshipName": "legalEntity",
+      "relationshipName": "cell",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "groupName",
+      "otherEntityName": "group",
+      "otherEntityRelationshipName": "legalEntity",
+      "relationshipName": "group",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

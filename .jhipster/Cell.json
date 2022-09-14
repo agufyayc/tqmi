@@ -1,0 +1,50 @@
+{
+  "applications": "*",
+  "changelogDate": "20220913101713",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "cell",
+  "fields": [
+    {
+      "fieldName": "cellName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Cell",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "abbreviation",
+      "otherEntityName": "employee",
+      "ownerSide": true,
+      "relationshipName": "bod",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "abbreviation",
+      "otherEntityName": "employee",
+      "ownerSide": true,
+      "relationshipName": "ebod",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "abbreviation",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "cell",
+      "relationshipName": "employee",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "legalEntityName",
+      "otherEntityName": "legalEntity",
+      "otherEntityRelationshipName": "cell",
+      "relationshipName": "legalEntity",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,28 @@
+{
+  "tqmiApp": {
+    "cell": {
+      "home": {
+        "title": "Cells",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Cell erstellen",
+        "createOrEditLabel": "Cell erstellen oder bearbeiten",
+        "notFound": "Keine Cells gefunden"
+      },
+      "created": "Cell erstellt mit ID {{ param }}",
+      "updated": "Cell aktualisiert mit ID {{ param }}",
+      "deleted": "Cell gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Cell {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Cell"
+      },
+      "id": "ID",
+      "cellName": "Cell Name",
+      "bod": "Bod",
+      "ebod": "Ebod",
+      "employee": "Employee",
+      "legalEntity": "Legal Entity"
+    }
+  }
+}

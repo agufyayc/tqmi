@@ -1,0 +1,127 @@
+<div>
+  <h2 id="page-heading" data-cy="LegalEntityHeading">
+    <span jhiTranslate="tqmiApp.legalEntity.home.title">Legal Entities</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="tqmiApp.legalEntity.home.refreshListLabel">Liste aktualisieren</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-legal-entity"
+        [routerLink]="['/legal-entity/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="tqmiApp.legalEntity.home.createLabel"> Legal Entity erstellen </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="legalEntities?.length === 0">
+    <span jhiTranslate="tqmiApp.legalEntity.home.notFound">Keine Legal Entities gefunden</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="legalEntities && legalEntities.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="legalEntityName">
+            <div class="d-flex">
+              <span jhiTranslate="tqmiApp.legalEntity.legalEntityName">Legal Entity Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="streetAddress">
+            <div class="d-flex">
+              <span jhiTranslate="tqmiApp.legalEntity.streetAddress">Street Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="postalCode">
+            <div class="d-flex">
+              <span jhiTranslate="tqmiApp.legalEntity.postalCode">Postal Code</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="city">
+            <div class="d-flex">
+              <span jhiTranslate="tqmiApp.legalEntity.city">City</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="stateProvince">
+            <div class="d-flex">
+              <span jhiTranslate="tqmiApp.legalEntity.stateProvince">State Province</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="group.groupName">
+            <div class="d-flex">
+              <span jhiTranslate="tqmiApp.legalEntity.group">Group</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let legalEntity of legalEntities; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/legal-entity', legalEntity.id, 'view']">{{ legalEntity.id }}</a>
+          </td>
+          <td>{{ legalEntity.legalEntityName }}</td>
+          <td>{{ legalEntity.streetAddress }}</td>
+          <td>{{ legalEntity.postalCode }}</td>
+          <td>{{ legalEntity.city }}</td>
+          <td>{{ legalEntity.stateProvince }}</td>
+          <td>
+            <div *ngIf="legalEntity.group">
+              <a [routerLink]="['/group', legalEntity.group.id, 'view']">{{ legalEntity.group.groupName }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/legal-entity', legalEntity.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Details</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/legal-entity', legalEntity.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Bearbeiten</span>
+              </button>
+
+              <button type="submit" (click)="delete(legalEntity)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Löschen</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

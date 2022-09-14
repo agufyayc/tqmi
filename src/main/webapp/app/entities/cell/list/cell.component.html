@@ -1,0 +1,111 @@
+<div>
+  <h2 id="page-heading" data-cy="CellHeading">
+    <span jhiTranslate="tqmiApp.cell.home.title">Cells</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="tqmiApp.cell.home.refreshListLabel">Liste aktualisieren</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-cell"
+        [routerLink]="['/cell/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="tqmiApp.cell.home.createLabel"> Cell erstellen </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="cells?.length === 0">
+    <span jhiTranslate="tqmiApp.cell.home.notFound">Keine Cells gefunden</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="cells && cells.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cellName">
+            <div class="d-flex">
+              <span jhiTranslate="tqmiApp.cell.cellName">Cell Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="bod.abbreviation">
+            <div class="d-flex">
+              <span jhiTranslate="tqmiApp.cell.bod">Bod</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ebod.abbreviation">
+            <div class="d-flex">
+              <span jhiTranslate="tqmiApp.cell.ebod">Ebod</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="legalEntity.legalEntityName">
+            <div class="d-flex">
+              <span jhiTranslate="tqmiApp.cell.legalEntity">Legal Entity</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cell of cells; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/cell', cell.id, 'view']">{{ cell.id }}</a>
+          </td>
+          <td>{{ cell.cellName }}</td>
+          <td>
+            <div *ngIf="cell.bod">
+              <a [routerLink]="['/employee', cell.bod.id, 'view']">{{ cell.bod.abbreviation }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="cell.ebod">
+              <a [routerLink]="['/employee', cell.ebod.id, 'view']">{{ cell.ebod.abbreviation }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="cell.legalEntity">
+              <a [routerLink]="['/legal-entity', cell.legalEntity.id, 'view']">{{ cell.legalEntity.legalEntityName }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/cell', cell.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Details</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/cell', cell.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Bearbeiten</span>
+              </button>
+
+              <button type="submit" (click)="delete(cell)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Löschen</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

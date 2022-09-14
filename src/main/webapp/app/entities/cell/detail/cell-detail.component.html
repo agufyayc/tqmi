@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="cell">
+      <h2 data-cy="cellDetailsHeading"><span jhiTranslate="tqmiApp.cell.detail.title">Cell</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ cell.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="tqmiApp.cell.cellName">Cell Name</span></dt>
+        <dd>
+          <span>{{ cell.cellName }}</span>
+        </dd>
+        <dt><span jhiTranslate="tqmiApp.cell.bod">Bod</span></dt>
+        <dd>
+          <div *ngIf="cell.bod">
+            <a [routerLink]="['/employee', cell.bod.id, 'view']">{{ cell.bod.abbreviation }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="tqmiApp.cell.ebod">Ebod</span></dt>
+        <dd>
+          <div *ngIf="cell.ebod">
+            <a [routerLink]="['/employee', cell.ebod.id, 'view']">{{ cell.ebod.abbreviation }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="tqmiApp.cell.legalEntity">Legal Entity</span></dt>
+        <dd>
+          <div *ngIf="cell.legalEntity">
+            <a [routerLink]="['/legal-entity', cell.legalEntity.id, 'view']">{{ cell.legalEntity.legalEntityName }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Zurück</span>
+      </button>
+
+      <button type="button" [routerLink]="['/cell', cell.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Bearbeiten</span>
+      </button>
+    </div>
+  </div>
+</div>

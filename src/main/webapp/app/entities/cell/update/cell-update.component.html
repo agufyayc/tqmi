@@ -1,0 +1,85 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-cell-heading" data-cy="CellCreateUpdateHeading" jhiTranslate="tqmiApp.cell.home.createOrEditLabel">
+        Cell erstellen oder bearbeiten
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="tqmiApp.cell.cellName" for="field_cellName">Cell Name</label>
+          <input type="text" class="form-control" name="cellName" id="field_cellName" data-cy="cellName" formControlName="cellName" />
+          <div *ngIf="editForm.get('cellName')!.invalid && (editForm.get('cellName')!.dirty || editForm.get('cellName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('cellName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Dieses Feld wird benötigt.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="tqmiApp.cell.bod" for="field_bod">Bod</label>
+          <select class="form-control" id="field_bod" data-cy="bod" name="bod" formControlName="bod" [compareWith]="compareEmployee">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="employeeOption" *ngFor="let employeeOption of employeesSharedCollection">
+              {{ employeeOption.abbreviation }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="tqmiApp.cell.ebod" for="field_ebod">Ebod</label>
+          <select class="form-control" id="field_ebod" data-cy="ebod" name="ebod" formControlName="ebod" [compareWith]="compareEmployee">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="employeeOption" *ngFor="let employeeOption of employeesSharedCollection">
+              {{ employeeOption.abbreviation }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="tqmiApp.cell.legalEntity" for="field_legalEntity">Legal Entity</label>
+          <select
+            class="form-control"
+            id="field_legalEntity"
+            data-cy="legalEntity"
+            name="legalEntity"
+            formControlName="legalEntity"
+            [compareWith]="compareLegalEntity"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="legalEntityOption" *ngFor="let legalEntityOption of legalEntitiesSharedCollection">
+              {{ legalEntityOption.legalEntityName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Abbrechen</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Speichern</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

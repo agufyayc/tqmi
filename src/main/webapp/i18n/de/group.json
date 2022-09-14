@@ -1,0 +1,26 @@
+{
+  "tqmiApp": {
+    "group": {
+      "home": {
+        "title": "Groups",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Group erstellen",
+        "createOrEditLabel": "Group erstellen oder bearbeiten",
+        "notFound": "Keine Groups gefunden"
+      },
+      "created": "Group erstellt mit ID {{ param }}",
+      "updated": "Group aktualisiert mit ID {{ param }}",
+      "deleted": "Group gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Group {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Group"
+      },
+      "id": "ID",
+      "groupName": "Group Name",
+      "ceog": "Ceog",
+      "legalEntity": "Legal Entity"
+    }
+  }
+}

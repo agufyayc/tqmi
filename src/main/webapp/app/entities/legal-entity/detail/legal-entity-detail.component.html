@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="legalEntity">
+      <h2 data-cy="legalEntityDetailsHeading"><span jhiTranslate="tqmiApp.legalEntity.detail.title">Legal Entity</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ legalEntity.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="tqmiApp.legalEntity.legalEntityName">Legal Entity Name</span></dt>
+        <dd>
+          <span>{{ legalEntity.legalEntityName }}</span>
+        </dd>
+        <dt><span jhiTranslate="tqmiApp.legalEntity.streetAddress">Street Address</span></dt>
+        <dd>
+          <span>{{ legalEntity.streetAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="tqmiApp.legalEntity.postalCode">Postal Code</span></dt>
+        <dd>
+          <span>{{ legalEntity.postalCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="tqmiApp.legalEntity.city">City</span></dt>
+        <dd>
+          <span>{{ legalEntity.city }}</span>
+        </dd>
+        <dt><span jhiTranslate="tqmiApp.legalEntity.stateProvince">State Province</span></dt>
+        <dd>
+          <span>{{ legalEntity.stateProvince }}</span>
+        </dd>
+        <dt><span jhiTranslate="tqmiApp.legalEntity.group">Group</span></dt>
+        <dd>
+          <div *ngIf="legalEntity.group">
+            <a [routerLink]="['/group', legalEntity.group.id, 'view']">{{ legalEntity.group.groupName }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Zurück</span>
+      </button>
+
+      <button type="button" [routerLink]="['/legal-entity', legalEntity.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Bearbeiten</span>
+      </button>
+    </div>
+  </div>
+</div>
